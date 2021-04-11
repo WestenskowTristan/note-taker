@@ -1,8 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const { notes } = require("./db/db.json");
+const { notes } = require("./db/db");
 const express = require("express");
-
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -28,8 +27,7 @@ app.post("/api/notes", (req, res) => {
   const newNote = req.body;
   notes.push(newNote);
   fs.writeFileSync(
-    path,
-    json(__dirname, "./db/db.json"),
+    path.join(__dirname, "./db/db.json"),
     JSON.stringify({ notes }, null, 2)
   );
   res.json(newNote);
